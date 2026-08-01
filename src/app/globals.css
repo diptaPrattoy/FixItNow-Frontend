@@ -55,3 +55,15 @@ textarea {
     transition-duration: 0.01ms !important;
   }
 }
+
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 360px;
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

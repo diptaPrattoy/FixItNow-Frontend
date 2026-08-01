@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
 import { useToast } from "@/components/providers/toast-provider";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import {
   clearAuthSession,
@@ -17,9 +18,19 @@ type DashboardShellProps = {
   children: ReactNode;
 };
 
+type DashboardIconName =
+  | "overview"
+  | "bookings"
+  | "payments"
+  | "profile"
+  | "availability"
+  | "users"
+  | "categories";
+
 type DashboardNavItem = {
   href: string;
   label: string;
+  icon: DashboardIconName;
 };
 
 type DashboardContext = {
@@ -37,8 +48,8 @@ const dashboards: Record<string, DashboardContext> = {
     home: "/dashboard/customer",
     description: "Book services and follow every job from one place.",
     navigation: [
-      { href: "/dashboard/customer", label: "Bookings" },
-      { href: "/dashboard/customer/payments", label: "Payments" },
+      { href: "/dashboard/customer", label: "Bookings", icon: "bookings" },
+      { href: "/dashboard/customer/payments", label: "Payments", icon: "payments" },
     ],
   },
   technician: {
@@ -47,9 +58,9 @@ const dashboards: Record<string, DashboardContext> = {
     home: "/dashboard/technician",
     description: "Manage your services, availability and incoming work.",
     navigation: [
-      { href: "/dashboard/technician", label: "Profile & services" },
-      { href: "/dashboard/technician/availability", label: "Availability" },
-      { href: "/dashboard/technician/bookings", label: "Bookings" },
+      { href: "/dashboard/technician", label: "Services", icon: "profile" },
+      { href: "/dashboard/technician/availability", label: "Availability", icon: "availability" },
+      { href: "/dashboard/technician/bookings", label: "Bookings", icon: "bookings" },
     ],
   },
   admin: {
@@ -58,10 +69,10 @@ const dashboards: Record<string, DashboardContext> = {
     home: "/dashboard/admin",
     description: "Review users, bookings and service categories.",
     navigation: [
-      { href: "/dashboard/admin", label: "Overview" },
-      { href: "/dashboard/admin/users", label: "Users" },
-      { href: "/dashboard/admin/bookings", label: "Bookings" },
-      { href: "/dashboard/admin/categories", label: "Categories" },
+      { href: "/dashboard/admin", label: "Overview", icon: "overview" },
+      { href: "/dashboard/admin/users", label: "Users", icon: "users" },
+      { href: "/dashboard/admin/bookings", label: "Bookings", icon: "bookings" },
+      { href: "/dashboard/admin/categories", label: "Categories", icon: "categories" },
     ],
   },
 };
@@ -72,10 +83,90 @@ function getDashboardContext(pathname: string) {
 }
 
 function isActivePath(pathname: string, item: DashboardNavItem) {
-  if (item.href === "/dashboard/customer" || item.href === "/dashboard/technician" || item.href === "/dashboard/admin") {
+  if (
+    item.href === "/dashboard/customer" ||
+    item.href === "/dashboard/technician" ||
+    item.href === "/dashboard/admin"
+  ) {
     return pathname === item.href;
   }
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
+}
+
+function DashboardIcon({ name }: { name: DashboardIconName }) {
+  const props = {
+    className: "size-5",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+
+  if (name === "overview") {
+    return (
+      <svg {...props}>
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </svg>
+    );
+  }
+
+  if (name === "bookings") {
+    return (
+      <svg {...props}>
+        <rect x="4" y="5" width="16" height="15" rx="2" />
+        <path d="M8 3v4M16 3v4M4 10h16M8 14h3M8 17h6" />
+      </svg>
+    );
+  }
+
+  if (name === "payments") {
+    return (
+      <svg {...props}>
+        <rect x="3" y="6" width="18" height="13" rx="2" />
+        <path d="M3 10h18M7 15h3" />
+      </svg>
+    );
+  }
+
+  if (name === "profile") {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="8" r="3" />
+        <path d="M5 21a7 7 0 0 1 14 0M18 4l1 1 2-2" />
+      </svg>
+    );
+  }
+
+  if (name === "availability") {
+    return (
+      <svg {...props}>
+        <rect x="3" y="5" width="18" height="16" rx="2" />
+        <path d="M8 3v4M16 3v4M3 10h18M8 15l2 2 5-5" />
+      </svg>
+    );
+  }
+
+  if (name === "users") {
+    return (
+      <svg {...props}>
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3 20a6 6 0 0 1 12 0M16 7a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...props}>
+      <path d="M4 7h16M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+      <path d="M8 11h8M8 15h5" />
+    </svg>
+  );
 }
 
 export function DashboardShell({ children }: DashboardShellProps) {
@@ -119,13 +210,21 @@ export function DashboardShell({ children }: DashboardShellProps) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <section className="mx-auto w-full max-w-7xl px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="mb-5 flex items-center justify-between gap-4 lg:hidden">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
-            {context.label} workspace
-          </p>
-          <p className="mt-1 text-sm text-slate-600">{session.user.name}</p>
+        <div className="flex min-w-0 items-center gap-3">
+          <UserAvatar
+            name={session.user.name}
+            src={session.user.avatarUrl}
+            size={44}
+            className="rounded-xl"
+          />
+          <div className="min-w-0">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
+              {context.label} workspace
+            </p>
+            <p className="mt-1 truncate text-sm font-semibold text-slate-800">{session.user.name}</p>
+          </div>
         </div>
         <button
           type="button"
@@ -134,40 +233,54 @@ export function DashboardShell({ children }: DashboardShellProps) {
           aria-expanded={menuOpen}
           aria-controls="dashboard-navigation"
         >
-          {menuOpen ? "Close" : "Menu"}
+          {menuOpen ? "Close" : "More"}
         </button>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
         <aside
           id="dashboard-navigation"
-          className={`${menuOpen ? "block" : "hidden"} h-fit rounded-2xl border border-slate-200 bg-white p-4 lg:sticky lg:top-24 lg:block`}
+          className={`${menuOpen ? "block" : "hidden"} h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:block`}
         >
           <div className="hidden border-b border-slate-100 px-2 pb-4 lg:block">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
-              {context.label} workspace
-            </p>
-            <p className="mt-2 font-semibold text-slate-950">{session.user.name}</p>
-            <p className="mt-1 text-sm leading-6 text-slate-500">
-              {context.description}
-            </p>
+            <div className="flex items-center gap-3">
+              <UserAvatar
+                name={session.user.name}
+                src={session.user.avatarUrl}
+                size={44}
+                className="rounded-xl"
+              />
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
+                  {context.label} workspace
+                </p>
+                <p className="mt-1 truncate font-semibold text-slate-950">{session.user.name}</p>
+              </div>
+            </div>
+            <p className="mt-3 text-sm leading-6 text-slate-500">{context.description}</p>
           </div>
 
           <nav className="space-y-1 lg:pt-4" aria-label={`${context.label} dashboard`}>
-            {context.navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className={`block rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
-                  isActivePath(pathname, item)
-                    ? "bg-emerald-50 text-emerald-800"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {context.navigation.map((item) => {
+              const active = isActivePath(pathname, item);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
+                    active
+                      ? "bg-emerald-50 text-emerald-800"
+                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
+                  }`}
+                >
+                  <DashboardIcon name={item.icon} />
+                  {item.label}
+                </Link>
+              );
+            })}
+            <div className="my-2 border-t border-slate-100" />
             <Link
               href="/services"
               onClick={() => setMenuOpen(false)}
@@ -195,6 +308,31 @@ export function DashboardShell({ children }: DashboardShellProps) {
 
         <div className="min-w-0">{children}</div>
       </div>
+
+      <nav
+        className="fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-lg items-stretch justify-around gap-1 rounded-2xl border border-slate-200 bg-white/95 px-2 pt-2 shadow-2xl shadow-slate-950/15 backdrop-blur-xl lg:hidden"
+        style={{ paddingBottom: "calc(0.5rem + env(safe-area-inset-bottom))" }}
+        aria-label={`${context.label} mobile dashboard`}
+      >
+        {context.navigation.map((item) => {
+          const active = isActivePath(pathname, item);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className={`flex min-w-0 flex-1 flex-col items-center gap-1 rounded-xl px-1.5 py-2 text-[0.68rem] font-semibold transition ${
+                active
+                  ? "bg-emerald-50 text-emerald-800"
+                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+              }`}
+            >
+              <DashboardIcon name={item.icon} />
+              <span className="max-w-full truncate">{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
     </section>
   );
 }

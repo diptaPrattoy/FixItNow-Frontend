@@ -16,7 +16,7 @@ export function ServiceCard({ service }: { service: PublicService }) {
   const rating = Number(service.technician.averageRating || 0);
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg hover:shadow-slate-950/5">
+    <article className="content-auto overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-lg hover:shadow-slate-950/5">
       <div className="relative aspect-[16/8.5] overflow-hidden bg-emerald-50">
         <Image
           src="/images/service-tools.svg"

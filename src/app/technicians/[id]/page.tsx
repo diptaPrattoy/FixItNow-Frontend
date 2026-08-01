@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { BookingPanel } from "@/components/customer/booking-panel";
 import { Rating } from "@/components/public/rating";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import { useToast } from "@/components/providers/toast-provider";
 import { apiRequest } from "@/lib/api/client";
 import { getApiErrorMessage } from "@/lib/api/errors";
@@ -89,9 +89,13 @@ function TechnicianDetailsContent({ technicianId }: { technicianId: string }) {
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
       <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
-          <div className="relative size-24 shrink-0 overflow-hidden rounded-3xl bg-emerald-50">
-            <Image src="/images/avatar-placeholder.svg" alt={technician.user.name} fill className="object-cover" sizes="96px" />
-          </div>
+          <UserAvatar
+            name={technician.user.name}
+            src={technician.user.avatarUrl}
+            size={96}
+            className="rounded-3xl"
+            priority
+          />
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-3">
               <h1 className="text-3xl font-bold tracking-tight text-slate-950">{technician.user.name}</h1>
@@ -138,7 +142,15 @@ function TechnicianDetailsContent({ technicianId }: { technicianId: string }) {
               {technician.reviews.map((review) => (
                 <article key={review.id} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="font-semibold text-slate-800">{review.customer.name}</p>
+                    <div className="flex min-w-0 items-center gap-3">
+                      <UserAvatar
+                        name={review.customer.name}
+                        src={review.customer.avatarUrl}
+                        size={36}
+                        className="rounded-xl"
+                      />
+                      <p className="truncate font-semibold text-slate-800">{review.customer.name}</p>
+                    </div>
                     <Rating value={review.rating} />
                   </div>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{review.comment ?? "No written comment."}</p>

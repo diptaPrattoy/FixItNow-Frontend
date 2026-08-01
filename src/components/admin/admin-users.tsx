@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useToast } from "@/components/providers/toast-provider";
 import { Pagination } from "@/components/public/pagination";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { apiRequest } from "@/lib/api/client";
@@ -387,9 +388,17 @@ export function AdminUsers() {
             {users.map((user) => (
               <article key={user.id} className="rounded-2xl border border-slate-200 p-4">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="truncate font-semibold text-slate-950">{user.name}</p>
-                    <p className="mt-1 truncate text-sm text-slate-500">{user.email}</p>
+                  <div className="flex min-w-0 items-center gap-3">
+                    <UserAvatar
+                      name={user.name}
+                      src={user.avatarUrl}
+                      size={44}
+                      className="rounded-xl"
+                    />
+                    <div className="min-w-0">
+                      <p className="truncate font-semibold text-slate-950">{user.name}</p>
+                      <p className="mt-1 truncate text-sm text-slate-500">{user.email}</p>
+                    </div>
                   </div>
                   <UserStatusBadge status={user.status} />
                 </div>
@@ -453,21 +462,31 @@ export function AdminUsers() {
                 {users.map((user) => (
                   <tr key={user.id} className="border-b border-slate-100 last:border-0">
                     <td className="px-3 py-4 align-top">
-                      <p className="font-semibold text-slate-900">{user.name}</p>
-                      <a
-                        href={`mailto:${user.email}`}
-                        className="mt-1 block text-xs text-slate-500 hover:text-emerald-700"
-                      >
-                        {user.email}
-                      </a>
-                      {user.phone ? (
-                        <a
-                          href={`tel:${user.phone}`}
-                          className="mt-1 block text-xs text-slate-500 hover:text-emerald-700"
-                        >
-                          {user.phone}
-                        </a>
-                      ) : null}
+                      <div className="flex items-start gap-3">
+                        <UserAvatar
+                          name={user.name}
+                          src={user.avatarUrl}
+                          size={40}
+                          className="rounded-xl"
+                        />
+                        <div className="min-w-0">
+                          <p className="font-semibold text-slate-900">{user.name}</p>
+                          <a
+                            href={`mailto:${user.email}`}
+                            className="mt-1 block text-xs text-slate-500 hover:text-emerald-700"
+                          >
+                            {user.email}
+                          </a>
+                          {user.phone ? (
+                            <a
+                              href={`tel:${user.phone}`}
+                              className="mt-1 block text-xs text-slate-500 hover:text-emerald-700"
+                            >
+                              {user.phone}
+                            </a>
+                          ) : null}
+                        </div>
+                      </div>
                     </td>
                     <td className="px-3 py-4 align-top">
                       <RoleBadge role={user.role} />

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -14,6 +14,20 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: [
+    "home services",
+    "technicians",
+    "service booking",
+    "Bangladesh",
+    "SSLCommerz",
+  ],
+  manifest: "/manifest.webmanifest",
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#047857",
 };
 
 export default function RootLayout({

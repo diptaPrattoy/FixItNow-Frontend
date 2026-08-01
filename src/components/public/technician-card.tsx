@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Rating } from "@/components/public/rating";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import type { TechnicianListItem } from "@/types/api";
 
 function formatPrice(price: string) {
@@ -19,17 +19,14 @@ export function TechnicianCard({ technician }: { technician: TechnicianListItem 
   }, null);
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-200 hover:shadow-lg hover:shadow-slate-950/5">
+    <article className="content-auto rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-emerald-200 hover:shadow-lg hover:shadow-slate-950/5">
       <div className="flex items-start gap-4">
-        <div className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-emerald-50">
-          <Image
-            src="/images/avatar-placeholder.svg"
-            alt={technician.user.name}
-            fill
-            className="object-cover"
-            sizes="64px"
-          />
-        </div>
+        <UserAvatar
+          name={technician.user.name}
+          src={technician.user.avatarUrl}
+          size={64}
+          className="rounded-2xl"
+        />
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-3">
             <div>

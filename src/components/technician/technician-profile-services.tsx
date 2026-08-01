@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 import { FormField } from "@/components/auth/form-field";
 import { useToast } from "@/components/providers/toast-provider";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { apiRequest } from "@/lib/api/client";
 import { getApiErrorMessage, getApiFieldErrors } from "@/lib/api/errors";
@@ -442,12 +442,11 @@ export function TechnicianProfileServices() {
       <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="flex min-w-0 items-center gap-4">
-            <Image
-              src={session?.user.avatarUrl ?? "/images/avatar-placeholder.svg"}
-              alt=""
-              width={64}
-              height={64}
-              className="size-16 shrink-0 rounded-2xl border border-slate-200 bg-slate-50 object-cover"
+            <UserAvatar
+              name={session?.user.name ?? "Technician"}
+              src={session?.user.avatarUrl}
+              size={64}
+              className="rounded-2xl"
             />
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
