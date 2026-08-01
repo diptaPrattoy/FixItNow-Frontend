@@ -15,15 +15,17 @@ The frontend reads the base URL from `NEXT_PUBLIC_API_URL`.
 | `/auth/register` | `POST /api/auth/register` | Implemented |
 | `/auth/login` | `POST /api/auth/login` | Implemented |
 | Header authentication state | JWT returned by login | Implemented |
+| `/services` category selector | `GET /api/categories` | Implemented |
+| `/services` service grid and filters | `GET /api/services` | Implemented |
+| `/technicians` search and listing | `GET /api/technicians` | Implemented |
+| `/technicians/[id]` public profile | `GET /api/technicians/:id` | Implemented |
 
-Authentication errors are normalized by `src/lib/api/client.ts`. Structured backend validation errors are shown inline and all request failures are also displayed through the shared toast provider.
+All request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
 
 ## Planned mapping
 
 | Frontend route | Backend endpoint |
 | --- | --- |
-| `/` and `/services` | `GET /api/services`, `GET /api/categories`, `GET /api/technicians` |
-| `/technicians/[id]` | `GET /api/technicians/:id` |
 | `/dashboard/customer` | `GET /api/bookings`, `GET /api/payments` |
 | `/dashboard/customer/bookings/[id]/pay` | `POST /api/payments/create` |
 | `/dashboard/technician` | `GET /api/technician/profile`, `GET /api/technician/availability` |

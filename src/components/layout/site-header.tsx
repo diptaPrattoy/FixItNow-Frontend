@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { BrandLogo } from "@/components/shared/brand-logo";
 import { useToast } from "@/components/providers/toast-provider";
+import { BrandLogo } from "@/components/shared/brand-logo";
 import {
   clearAuthSession,
   getAuthSession,
@@ -20,7 +21,9 @@ const links = [
 
 export function SiteHeader() {
   const { toast } = useToast();
+  const router = useRouter();
   const [session, setSession] = useState<AuthSession | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const syncSession = () => setSession(getAuthSession());
@@ -34,10 +37,13 @@ export function SiteHeader() {
     };
   }, []);
 
+
   function handleLogout() {
     clearAuthSession();
     setSession(null);
+    setMenuOpen(false);
     toast("You have been logged out.", "success");
+    router.push("/");
   }
 
   return (
@@ -57,12 +63,12 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="hidden items-center gap-2 md:flex">
           {session ? (
             <>
               <Link
                 href={getDashboardPath(session.user.role)}
-                className="rounded-xl bg-emerald-600 px-3.5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700 sm:px-5"
+                className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
               >
                 Dashboard
               </Link>
@@ -76,22 +82,75 @@ export function SiteHeader() {
             </>
           ) : (
             <>
-              <Link
-                href="/auth/login"
-                className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 sm:px-4"
-              >
+              <Link href="/auth/login" className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
                 Log in
               </Link>
-              <Link
-                href="/auth/register"
-                className="rounded-xl bg-emerald-600 px-3.5 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700 sm:px-5"
-              >
+              <Link href="/auth/register" className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700">
                 Get started
               </Link>
             </>
           )}
         </div>
+
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          className="grid size-10 place-items-center rounded-xl border border-slate-200 text-slate-700 md:hidden"
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+        >
+          <span className="text-xl leading-none" aria-hidden="true">{menuOpen ? "×" : "☰"}</span>
+        </button>
       </div>
+
+      {menuOpen ? (
+        <div className="border-t border-slate-100 bg-white px-4 py-4 md:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1" aria-label="Mobile navigation">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-emerald-700"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="my-2 border-t border-slate-100" />
+            {session ? (
+              <>
+                <Link
+                  href={getDashboardPath(session.user.role)}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl bg-emerald-600 px-3 py-2.5 text-center text-sm font-semibold text-white"
+                >
+                  Open dashboard
+                </Link>
+                <button type="button" onClick={handleLogout} className="rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                  Log out
+                </button>
+              </>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/auth/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl border border-slate-300 px-3 py-2.5 text-center text-sm font-semibold text-slate-700"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/auth/register"
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-xl bg-emerald-600 px-3 py-2.5 text-center text-sm font-semibold text-white"
+                >
+                  Get started
+                </Link>
+              </div>
+            )}
+          </nav>
+        </div>
+      ) : null}
     </header>
   );
 }
