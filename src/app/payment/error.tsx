@@ -2,7 +2,7 @@
 
 import { RouteErrorState } from "@/components/shared/route-error-state";
 
-export default function ServicesError({
+export default function PaymentError({
   error,
   reset,
 }: {
@@ -13,8 +13,8 @@ export default function ServicesError({
     <RouteErrorState
       error={error}
       reset={reset}
-      title="The services page is unavailable"
-      description="Retry the request. If the problem continues, the backend service may still be starting."
+      title="The payment result could not be displayed"
+      description="Do not start another payment immediately. Retry this page, then check your payment history to confirm the transaction status."
     />
   );
 }

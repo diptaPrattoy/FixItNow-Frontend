@@ -2,7 +2,7 @@
 
 import { RouteErrorState } from "@/components/shared/route-error-state";
 
-export default function ServicesError({
+export default function DashboardError({
   error,
   reset,
 }: {
@@ -13,8 +13,8 @@ export default function ServicesError({
     <RouteErrorState
       error={error}
       reset={reset}
-      title="The services page is unavailable"
-      description="Retry the request. If the problem continues, the backend service may still be starting."
+      title="The dashboard could not be loaded"
+      description="Your account is safe. Retry the request, and check that the backend service is online if the issue continues."
     />
   );
 }

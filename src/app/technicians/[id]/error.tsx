@@ -2,7 +2,7 @@
 
 import { RouteErrorState } from "@/components/shared/route-error-state";
 
-export default function ServicesError({
+export default function TechnicianDetailsError({
   error,
   reset,
 }: {
@@ -13,8 +13,8 @@ export default function ServicesError({
     <RouteErrorState
       error={error}
       reset={reset}
-      title="The services page is unavailable"
-      description="Retry the request. If the problem continues, the backend service may still be starting."
+      title="This technician profile could not be loaded"
+      description="The profile may be temporarily unavailable. Retry the request or browse other technicians."
     />
   );
 }

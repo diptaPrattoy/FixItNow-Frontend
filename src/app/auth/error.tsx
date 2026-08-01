@@ -2,7 +2,7 @@
 
 import { RouteErrorState } from "@/components/shared/route-error-state";
 
-export default function ServicesError({
+export default function AuthError({
   error,
   reset,
 }: {
@@ -13,8 +13,8 @@ export default function ServicesError({
     <RouteErrorState
       error={error}
       reset={reset}
-      title="The services page is unavailable"
-      description="Retry the request. If the problem continues, the backend service may still be starting."
+      title="Authentication is temporarily unavailable"
+      description="Retry the page before submitting your credentials again. No password was saved by this error page."
     />
   );
 }
