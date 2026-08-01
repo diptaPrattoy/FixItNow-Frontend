@@ -46,6 +46,7 @@ const dashboards: Record<string, DashboardContext> = {
     navigation: [
       { href: "/dashboard/technician", label: "Profile & services" },
       { href: "/dashboard/technician/availability", label: "Availability" },
+      { href: "/dashboard/technician/bookings", label: "Bookings" },
     ],
   },
   admin: {

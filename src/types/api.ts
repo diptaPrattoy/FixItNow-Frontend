@@ -277,3 +277,55 @@ export type TechnicianManagedService = {
     slug: string;
   };
 };
+
+export type TechnicianBooking = {
+  id: string;
+  address: string;
+  notes: string | null;
+  amount: string;
+  status: BookingStatus;
+  declineReason: string | null;
+  cancellationReason: string | null;
+  acceptedAt: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  customer: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string | null;
+    avatarUrl?: string | null;
+  };
+  service: {
+    id: string;
+    name: string;
+    price: string;
+    durationMinutes: number;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+  };
+  availabilitySlot: {
+    id: string;
+    startTime: string;
+    endTime: string;
+  };
+  payments?: Array<{
+    id: string;
+    transactionId: string;
+    amount: string;
+    status: string;
+    provider: string;
+    paidAt: string | null;
+  }>;
+  review?: {
+    id: string;
+    rating: number;
+    comment: string | null;
+  } | null;
+};
