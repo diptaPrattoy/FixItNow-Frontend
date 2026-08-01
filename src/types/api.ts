@@ -329,3 +329,34 @@ export type TechnicianBooking = {
     comment: string | null;
   } | null;
 };
+
+export type PaymentStatus =
+  | "PENDING"
+  | "COMPLETED"
+  | "FAILED"
+  | "CANCELLED";
+
+export type PaymentRecord = {
+  id: string;
+  transactionId: string;
+  amount: string;
+  currency?: string;
+  provider: string;
+  status: PaymentStatus;
+  paidAt: string | null;
+  createdAt: string;
+  updatedAt?: string;
+  booking?: {
+    id: string;
+    status?: BookingStatus;
+    service?: {
+      id: string;
+      name: string;
+    };
+  };
+};
+
+export type PaymentSession = {
+  payment: PaymentRecord;
+  gatewayPageUrl: string;
+};

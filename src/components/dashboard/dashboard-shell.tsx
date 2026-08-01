@@ -36,7 +36,10 @@ const dashboards: Record<string, DashboardContext> = {
     label: "Customer",
     home: "/dashboard/customer",
     description: "Book services and follow every job from one place.",
-    navigation: [{ href: "/dashboard/customer", label: "Bookings" }],
+    navigation: [
+      { href: "/dashboard/customer", label: "Bookings" },
+      { href: "/dashboard/customer/payments", label: "Payments" },
+    ],
   },
   technician: {
     role: "TECHNICIAN",

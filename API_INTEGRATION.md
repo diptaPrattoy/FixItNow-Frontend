@@ -6,7 +6,7 @@ Backend base URL:
 https://fixitnow-qemf.onrender.com
 ```
 
-The frontend reads the base URL from `NEXT_PUBLIC_API_URL`.
+Browser API requests read `NEXT_PUBLIC_API_URL`. Server-side SSLCommerz callback forwarding reads `BACKEND_API_URL`.
 
 ## Implemented mapping
 
@@ -23,23 +23,37 @@ The frontend reads the base URL from `NEXT_PUBLIC_API_URL`.
 | Technician profile booking form | `POST /api/bookings` | Implemented |
 | `/dashboard/customer` booking history | `GET /api/bookings` | Implemented |
 | Customer booking cancellation | `PATCH /api/bookings/:id/cancel` | Implemented |
+| `/dashboard/customer/bookings/[id]/pay` booking review | `GET /api/bookings/:id` | Implemented |
+| `/dashboard/customer/bookings/[id]/pay` checkout initiation | `POST /api/payments/create` | Implemented |
+| `/dashboard/customer/payments` payment history | `GET /api/payments` | Implemented |
+| Frontend SSLCommerz callback proxies | Backend `POST /api/payments/success`, `/fail`, `/cancel`, `/ipn` | Implemented |
+| `/payment/success`, `/payment/cancel` | SSLCommerz result UI | Implemented |
 | Technician profile workspace | `GET /api/technician/profile`, `PUT /api/technician/profile` | Implemented |
 | Technician service management | `GET`, `POST`, `PATCH`, `DELETE /api/technician/services` | Implemented |
 | Technician service category selector | `GET /api/categories` | Implemented |
 | `/dashboard/technician/availability` scheduler | `GET`, `POST`, `PATCH`, `DELETE /api/technician/availability` | Implemented |
 | `/dashboard/technician/bookings` booking workflow | `GET /api/technician/bookings`, `PATCH /api/technician/bookings/:id` | Implemented |
 
-All request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
+All browser request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
+
+## SSLCommerz callback flow
+
+1. The customer starts payment from `/dashboard/customer/bookings/[id]/pay`.
+2. `POST /api/payments/create` returns the SSLCommerz hosted checkout URL.
+3. The browser redirects to SSLCommerz.
+4. SSLCommerz posts its result to the deployed frontend callback route under `/api/payments/*`.
+5. The Next.js route handler forwards the original callback payload to the Render backend for authoritative validation.
+6. The frontend route redirects the browser to `/payment/success` or `/payment/cancel`.
+
+The backend Render environment variable `APP_BASE_URL` must therefore point to the deployed Vercel frontend origin after Commit 10 is deployed.
 
 ## Planned mapping
 
 | Frontend route | Backend endpoint |
 | --- | --- |
-| `/dashboard/customer` payment history | `GET /api/payments` |
-| `/dashboard/customer/bookings/[id]/pay` | `POST /api/payments/create` |
+| Completed-booking review UI | `POST /api/reviews` |
 | `/dashboard/admin` | `GET /api/admin/users`, `GET /api/admin/bookings` |
 | `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |
-| `/payment/success`, `/payment/cancel` | SSLCommerz redirect result UI |
 
 ## Route protection
 

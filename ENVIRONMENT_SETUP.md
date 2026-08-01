@@ -2,10 +2,11 @@
 
 ## Local development
 
-Create `.env.local` in the project root before running the frontend locally:
+Create `.env.local` in the project root:
 
 ```env
 NEXT_PUBLIC_API_URL=https://fixitnow-qemf.onrender.com
+BACKEND_API_URL=https://fixitnow-qemf.onrender.com
 ```
 
 The file should sit beside `package.json`:
@@ -20,23 +21,52 @@ FixItNow-Frontend/
 
 Do not commit `.env.local`. It is already ignored by `.gitignore`.
 
+`NEXT_PUBLIC_API_URL` is used by browser requests. `BACKEND_API_URL` is used only by the Next.js server route handlers that forward SSLCommerz callbacks to the backend.
+
 ## Vercel deployment
 
-After importing the GitHub repository into Vercel, open:
+Import the GitHub repository into Vercel, then open:
 
 ```text
 Project Settings → Environment Variables
 ```
 
-Add:
+Add both variables for Production, Preview and Development:
 
 ```text
-Name: NEXT_PUBLIC_API_URL
-Value: https://fixitnow-qemf.onrender.com
+NEXT_PUBLIC_API_URL=https://fixitnow-qemf.onrender.com
+BACKEND_API_URL=https://fixitnow-qemf.onrender.com
 ```
 
-Enable it for Production, Preview, and Development. Redeploy after adding or changing a `NEXT_PUBLIC_` variable because Next.js includes public variables in the browser bundle during the build.
+Deploy the frontend and copy its production URL, for example:
 
-You do not need to know the Vercel frontend URL to configure this variable. The value is the backend API URL, not the frontend URL.
+```text
+https://fixitnow-frontend.vercel.app
+```
 
-The Vercel frontend URL will matter later when the SSLCommerz payment success and cancel flow is connected to dedicated frontend pages. At that stage, the backend callback/redirect handling will be updated to return the customer to the deployed frontend.
+## Connect SSLCommerz to Vercel
+
+After the Vercel deployment succeeds, open the FixItNow backend service on Render and update:
+
+```env
+APP_BASE_URL=https://YOUR-FRONTEND.vercel.app
+```
+
+Do not include a trailing slash. Save the variable and redeploy/restart the backend.
+
+This makes new SSLCommerz sessions use these public frontend callback URLs:
+
+```text
+https://YOUR-FRONTEND.vercel.app/api/payments/success
+https://YOUR-FRONTEND.vercel.app/api/payments/fail
+https://YOUR-FRONTEND.vercel.app/api/payments/cancel
+https://YOUR-FRONTEND.vercel.app/api/payments/ipn
+```
+
+Those route handlers forward the callback data to the Render backend for validation and then redirect the browser to the frontend result pages.
+
+Create a new payment session after changing `APP_BASE_URL`. Previously generated SSLCommerz gateway links still contain the old callback addresses.
+
+## CORS note
+
+The browser still sends normal API requests directly to Render. If the backend uses an allow-list for CORS, add the Vercel production origin to that allow-list and redeploy the backend.

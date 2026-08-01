@@ -328,9 +328,21 @@ export function CustomerDashboard() {
 
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   {booking.status === "ACCEPTED" ? (
-                    <span className="rounded-xl bg-violet-50 px-3.5 py-2 text-sm font-semibold text-violet-800">
-                      Ready for payment
-                    </span>
+                    <Link
+                      href={`/dashboard/customer/bookings/${booking.id}/pay`}
+                      className="rounded-xl bg-emerald-600 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                    >
+                      Pay now
+                    </Link>
+                  ) : null}
+
+                  {booking.status === "PAID" ? (
+                    <Link
+                      href="/dashboard/customer/payments"
+                      className="rounded-xl border border-violet-200 bg-violet-50 px-3.5 py-2 text-sm font-semibold text-violet-800 transition hover:bg-violet-100"
+                    >
+                      View payment
+                    </Link>
                   ) : null}
 
                   {isCancellable(booking.status) ? (
