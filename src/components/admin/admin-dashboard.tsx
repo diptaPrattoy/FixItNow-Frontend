@@ -102,9 +102,10 @@ export function AdminDashboard() {
         ))}
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         <Link href="/dashboard/admin/users" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage users</p><p className="mt-2 text-sm leading-6 text-slate-600">Search accounts and control customer or technician access.</p></Link>
         <Link href="/dashboard/admin/bookings" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Review bookings</p><p className="mt-2 text-sm leading-6 text-slate-600">Inspect every request, payment state and service outcome.</p></Link>
+        <Link href="/dashboard/admin/categories" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage categories</p><p className="mt-2 text-sm leading-6 text-slate-600">Create service groups and control which categories stay active.</p></Link>
       </section>
 
       <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">

@@ -37,6 +37,7 @@ Browser API requests read `NEXT_PUBLIC_API_URL`. Server-side SSLCommerz callback
 | `/dashboard/admin/users` user management | `GET /api/admin/users`, `PATCH /api/admin/users/:id` | Implemented |
 | `/dashboard/admin` live statistics | `GET /api/admin/users`, `GET /api/admin/bookings` | Implemented |
 | `/dashboard/admin/bookings` booking oversight | `GET /api/admin/bookings` | Implemented |
+| `/dashboard/admin/categories` category management | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` | Implemented |
 
 All browser request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
 
@@ -49,13 +50,7 @@ All browser request failures are normalized by `src/lib/api/client.ts` and displ
 5. The Next.js route handler forwards the original callback payload to the Render backend for authoritative validation.
 6. The frontend route redirects the browser to `/payment/success` or `/payment/cancel`.
 
-The backend Render environment variable `APP_BASE_URL` must therefore point to the deployed Vercel frontend origin after Commit 10 is deployed.
-
-## Planned mapping
-
-| Frontend route | Backend endpoint |
-| --- | --- |
-| `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |
+The backend Render environment variable `APP_BASE_URL` must therefore point to the deployed Vercel frontend origin after the frontend is deployed.
 
 ## Route protection
 
