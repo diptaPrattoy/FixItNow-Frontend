@@ -393,3 +393,62 @@ export type PaymentSession = {
   payment: PaymentRecord;
   gatewayPageUrl: string;
 };
+
+export type AdminBooking = {
+  id: string;
+  address: string;
+  notes: string | null;
+  amount: string;
+  status: BookingStatus;
+  declineReason: string | null;
+  cancellationReason: string | null;
+  acceptedAt: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  customer: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string | null;
+  };
+  technician: {
+    id: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      phone: string | null;
+    };
+  };
+  service: {
+    id: string;
+    name: string;
+    price: string;
+    category: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+  };
+  availabilitySlot: {
+    id: string;
+    startTime: string;
+    endTime: string;
+  };
+  payments: Array<{
+    id: string;
+    transactionId: string;
+    amount: string;
+    status: PaymentStatus;
+    provider: string;
+    paidAt: string | null;
+  }>;
+  review: {
+    id: string;
+    rating: number;
+    comment: string | null;
+  } | null;
+};

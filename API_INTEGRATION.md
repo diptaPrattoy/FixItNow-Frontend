@@ -35,6 +35,8 @@ Browser API requests read `NEXT_PUBLIC_API_URL`. Server-side SSLCommerz callback
 | `/dashboard/technician/availability` scheduler | `GET`, `POST`, `PATCH`, `DELETE /api/technician/availability` | Implemented |
 | `/dashboard/technician/bookings` booking workflow | `GET /api/technician/bookings`, `PATCH /api/technician/bookings/:id` | Implemented |
 | `/dashboard/admin/users` user management | `GET /api/admin/users`, `PATCH /api/admin/users/:id` | Implemented |
+| `/dashboard/admin` live statistics | `GET /api/admin/users`, `GET /api/admin/bookings` | Implemented |
+| `/dashboard/admin/bookings` booking oversight | `GET /api/admin/bookings` | Implemented |
 
 All browser request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
 
@@ -53,7 +55,6 @@ The backend Render environment variable `APP_BASE_URL` must therefore point to t
 
 | Frontend route | Backend endpoint |
 | --- | --- |
-| `/dashboard/admin` booking overview | `GET /api/admin/bookings` |
 | `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |
 
 ## Route protection
