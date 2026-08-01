@@ -2,15 +2,16 @@
 
 A responsive Next.js App Router frontend for the FixItNow home service marketplace.
 
-## Commit 1 scope
+## Commit 2 scope
 
-- Next.js 16 App Router and TypeScript foundation
-- Tailwind CSS 4 setup
-- Responsive public layout
-- Initial landing page
-- Loading and not-found states
-- Backend URL environment configuration
-- Initial API integration map
+- Shared API client and structured error normalization
+- Reusable toast notification system
+- Customer and technician registration UI
+- Customer, technician, and admin login support
+- JWT session persistence for later protected routes
+- Responsive role-aware header
+- Minimal dashboard landing placeholders
+- Updated API integration documentation
 
 ## Getting started
 
