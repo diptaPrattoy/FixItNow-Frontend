@@ -17,6 +17,7 @@ The frontend reads the base URL from `NEXT_PUBLIC_API_URL`.
 | Header authentication state | JWT returned by login | Implemented |
 | `/services` category selector | `GET /api/categories` | Implemented |
 | `/services` service grid and filters | `GET /api/services` | Implemented |
+| Home page featured services | `GET /api/services` | Implemented |
 | `/technicians` search and listing | `GET /api/technicians` | Implemented |
 | `/technicians/[id]` public profile | `GET /api/technicians/:id` | Implemented |
 | Technician profile booking form | `POST /api/bookings` | Implemented |

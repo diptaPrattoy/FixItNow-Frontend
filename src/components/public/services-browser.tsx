@@ -41,11 +41,26 @@ const defaultMeta: PaginationMeta = {
   hasPreviousPage: false,
 };
 
-export function ServicesBrowser() {
+type ServicesBrowserProps = {
+  initialSearch?: string;
+  initialLocation?: string;
+  initialCategory?: string;
+};
+
+export function ServicesBrowser({
+  initialSearch = "",
+  initialLocation = "",
+  initialCategory = "",
+}: ServicesBrowserProps) {
   const { toast } = useToast();
   const [categories, setCategories] = useState<Category[]>([]);
   const [services, setServices] = useState<PublicService[]>([]);
-  const [filters, setFilters] = useState<FilterState>(initialFilters);
+  const [filters, setFilters] = useState<FilterState>(() => ({
+    ...initialFilters,
+    search: initialSearch,
+    location: initialLocation,
+    category: initialCategory,
+  }));
   const [page, setPage] = useState(1);
   const [meta, setMeta] = useState<PaginationMeta>(defaultMeta);
   const [loading, setLoading] = useState(true);
