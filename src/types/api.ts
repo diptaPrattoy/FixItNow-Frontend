@@ -60,7 +60,9 @@ export type Category = {
   name: string;
   slug: string;
   description: string | null;
+  isActive?: boolean;
   createdAt: string;
+  updatedAt?: string;
   _count: {
     services: number;
   };
@@ -228,4 +230,40 @@ export type CustomerBooking = {
     rating: number;
     comment: string | null;
   } | null;
+};
+
+
+export type TechnicianPrivateProfile = {
+  id: string;
+  bio: string | null;
+  experienceYears: number;
+  location: string;
+  averageRating: string;
+  reviewCount: number;
+  isVerified: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  user?: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string | null;
+    avatarUrl: string | null;
+  };
+};
+
+export type TechnicianManagedService = {
+  id: string;
+  name: string;
+  description: string | null;
+  price: string;
+  durationMinutes: number;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  category: {
+    id: string;
+    name: string;
+    slug: string;
+  };
 };

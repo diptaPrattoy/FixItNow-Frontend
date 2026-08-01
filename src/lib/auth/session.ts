@@ -62,6 +62,12 @@ export function getAuthSession(): AuthSession | null {
   return getAuthSessionFromSnapshot(getAuthSessionStorageSnapshot());
 }
 
+export function updateAuthSessionUser(user: AuthUser) {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+  refreshAuthCookies(user.role);
+  window.dispatchEvent(new Event("fixitnow:auth-change"));
+}
+
 export function clearAuthSession() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(USER_KEY);

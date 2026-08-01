@@ -21,6 +21,7 @@ type DashboardContext = {
   role: UserRole;
   label: string;
   home: string;
+  homeLabel: string;
   description: string;
 };
 
@@ -29,18 +30,21 @@ const dashboards: Record<string, DashboardContext> = {
     role: "CUSTOMER",
     label: "Customer",
     home: "/dashboard/customer",
+    homeLabel: "Bookings",
     description: "Book services and follow every job from one place.",
   },
   technician: {
     role: "TECHNICIAN",
     label: "Technician",
     home: "/dashboard/technician",
+    homeLabel: "Profile & services",
     description: "Manage your services, availability and incoming work.",
   },
   admin: {
     role: "ADMIN",
     label: "Admin",
     home: "/dashboard/admin",
+    homeLabel: "Overview",
     description: "Review users, bookings and service categories.",
   },
 };
@@ -135,7 +139,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
               }`}
             >
-              Overview
+              {context.homeLabel}
             </Link>
             <Link
               href="/services"
