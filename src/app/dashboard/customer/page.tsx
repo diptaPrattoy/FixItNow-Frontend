@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import { DashboardOverview } from "@/components/dashboard/dashboard-overview";
+import { CustomerDashboard } from "@/components/customer/customer-dashboard";
 
 export const metadata: Metadata = {
   title: "Customer Dashboard",
 };
 
 export default function CustomerDashboardPage() {
-  return <DashboardOverview role="CUSTOMER" />;
+  return <CustomerDashboard />;
 }

@@ -163,3 +163,69 @@ export type TechnicianDetails = {
     };
   }>;
 };
+
+
+export type BookingStatus =
+  | "REQUESTED"
+  | "ACCEPTED"
+  | "DECLINED"
+  | "CANCELLED"
+  | "PAID"
+  | "IN_PROGRESS"
+  | "COMPLETED";
+
+export type CustomerBooking = {
+  id: string;
+  address: string;
+  notes: string | null;
+  amount: string;
+  status: BookingStatus;
+  declineReason: string | null;
+  cancellationReason: string | null;
+  acceptedAt: string | null;
+  startedAt: string | null;
+  completedAt: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  service: {
+    id: string;
+    name: string;
+    price: string;
+    durationMinutes: number;
+    category?: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+  };
+  technician: {
+    id: string;
+    location?: string;
+    user: {
+      id: string;
+      name: string;
+      email?: string;
+      phone?: string | null;
+      avatarUrl?: string | null;
+    };
+  };
+  availabilitySlot: {
+    id: string;
+    startTime: string;
+    endTime: string;
+  };
+  payments?: Array<{
+    id: string;
+    transactionId: string;
+    amount: string;
+    status: string;
+    provider: string;
+    paidAt: string | null;
+  }>;
+  review?: {
+    id: string;
+    rating: number;
+    comment: string | null;
+  } | null;
+};

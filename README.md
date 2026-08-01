@@ -4,7 +4,7 @@ A responsive Next.js App Router frontend for the FixItNow home service marketpla
 
 ## Overview
 
-FixItNow connects customers with local service professionals. The frontend supports public service discovery, technician profiles, JWT-based authentication, role-aware navigation and protected Customer, Technician and Admin workspaces.
+FixItNow connects customers with local service professionals. The frontend supports public service discovery, technician profiles, customer booking requests, booking tracking, JWT-based authentication, role-aware navigation and protected Customer, Technician and Admin workspaces.
 
 ## Technology
 

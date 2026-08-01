@@ -36,7 +36,14 @@ export default function LoginPage() {
 
       saveAuthSession(response.data);
       toast(`Welcome back, ${response.data.user.name}.`, "success");
-      router.push(getDashboardPath(response.data.user.role));
+
+      const nextPath = new URLSearchParams(window.location.search).get("next");
+      const safeNextPath =
+        response.data.user.role === "CUSTOMER" && nextPath?.startsWith("/")
+          ? nextPath
+          : getDashboardPath(response.data.user.role);
+
+      router.push(safeNextPath);
       router.refresh();
     } catch (error) {
       setFieldErrors(getApiFieldErrors(error));

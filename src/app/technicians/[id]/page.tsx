@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { BookingPanel } from "@/components/customer/booking-panel";
 import { Rating } from "@/components/public/rating";
 import { useToast } from "@/components/providers/toast-provider";
 import { apiRequest } from "@/lib/api/client";
@@ -17,13 +18,6 @@ function formatPrice(price: string) {
     currency: "BDT",
     maximumFractionDigits: 0,
   }).format(Number(price));
-}
-
-function formatSlot(value: string) {
-  return new Intl.DateTimeFormat("en-BD", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date(value));
 }
 
 export default function TechnicianDetailsPage() {
@@ -156,24 +150,7 @@ function TechnicianDetailsContent({ technicianId }: { technicianId: string }) {
         </div>
 
         <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
-          <h2 className="text-lg font-bold text-slate-950">Available time slots</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">Choose a service and slot in the booking flow.</p>
-          <div className="mt-5 space-y-2">
-            {technician.availabilitySlots.slice(0, 6).map((slot) => (
-              <div key={slot.id} className="rounded-xl border border-slate-200 px-3.5 py-3 text-sm text-slate-700">
-                {formatSlot(slot.startTime)}
-              </div>
-            ))}
-            {technician.availabilitySlots.length === 0 ? (
-              <p className="rounded-xl bg-slate-50 px-3.5 py-4 text-sm text-slate-500">No future slots are available.</p>
-            ) : null}
-          </div>
-          <Link
-            href="/auth/login"
-            className="mt-5 block rounded-xl bg-emerald-600 px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-emerald-700"
-          >
-            Log in to book
-          </Link>
+          <BookingPanel technician={technician} />
         </aside>
       </div>
     </div>
