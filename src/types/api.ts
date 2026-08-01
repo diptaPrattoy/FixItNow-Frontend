@@ -252,6 +252,16 @@ export type TechnicianPrivateProfile = {
   };
 };
 
+
+export type TechnicianAvailabilitySlot = {
+  id: string;
+  startTime: string;
+  endTime: string;
+  status?: "AVAILABLE" | "BOOKED" | string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type TechnicianManagedService = {
   id: string;
   name: string;

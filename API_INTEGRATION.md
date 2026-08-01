@@ -26,6 +26,7 @@ The frontend reads the base URL from `NEXT_PUBLIC_API_URL`.
 | Technician profile workspace | `GET /api/technician/profile`, `PUT /api/technician/profile` | Implemented |
 | Technician service management | `GET`, `POST`, `PATCH`, `DELETE /api/technician/services` | Implemented |
 | Technician service category selector | `GET /api/categories` | Implemented |
+| `/dashboard/technician/availability` scheduler | `GET`, `POST`, `PATCH`, `DELETE /api/technician/availability` | Implemented |
 
 All request failures are normalized by `src/lib/api/client.ts` and displayed through the shared toast provider. Public discovery routes also provide skeleton loading, empty-result feedback and App Router `error.tsx` fallbacks.
 
@@ -35,7 +36,6 @@ All request failures are normalized by `src/lib/api/client.ts` and displayed thr
 | --- | --- |
 | `/dashboard/customer` payment history | `GET /api/payments` |
 | `/dashboard/customer/bookings/[id]/pay` | `POST /api/payments/create` |
-| `/dashboard/technician` availability scheduler | `GET /api/technician/availability`, `POST /api/technician/availability` |
 | `/dashboard/technician/bookings` | `GET /api/technician/bookings`, `PATCH /api/technician/bookings/:id` |
 | `/dashboard/admin` | `GET /api/admin/users`, `GET /api/admin/bookings` |
 | `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |

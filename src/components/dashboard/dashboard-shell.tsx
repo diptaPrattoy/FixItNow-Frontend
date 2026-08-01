@@ -17,12 +17,17 @@ type DashboardShellProps = {
   children: ReactNode;
 };
 
+type DashboardNavItem = {
+  href: string;
+  label: string;
+};
+
 type DashboardContext = {
   role: UserRole;
   label: string;
   home: string;
-  homeLabel: string;
   description: string;
+  navigation: DashboardNavItem[];
 };
 
 const dashboards: Record<string, DashboardContext> = {
@@ -30,28 +35,38 @@ const dashboards: Record<string, DashboardContext> = {
     role: "CUSTOMER",
     label: "Customer",
     home: "/dashboard/customer",
-    homeLabel: "Bookings",
     description: "Book services and follow every job from one place.",
+    navigation: [{ href: "/dashboard/customer", label: "Bookings" }],
   },
   technician: {
     role: "TECHNICIAN",
     label: "Technician",
     home: "/dashboard/technician",
-    homeLabel: "Profile & services",
     description: "Manage your services, availability and incoming work.",
+    navigation: [
+      { href: "/dashboard/technician", label: "Profile & services" },
+      { href: "/dashboard/technician/availability", label: "Availability" },
+    ],
   },
   admin: {
     role: "ADMIN",
     label: "Admin",
     home: "/dashboard/admin",
-    homeLabel: "Overview",
     description: "Review users, bookings and service categories.",
+    navigation: [{ href: "/dashboard/admin", label: "Overview" }],
   },
 };
 
 function getDashboardContext(pathname: string) {
   const segment = pathname.split("/")[2];
   return dashboards[segment] ?? null;
+}
+
+function isActivePath(pathname: string, item: DashboardNavItem) {
+  if (item.href === "/dashboard/customer" || item.href === "/dashboard/technician" || item.href === "/dashboard/admin") {
+    return pathname === item.href;
+  }
+  return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
 export function DashboardShell({ children }: DashboardShellProps) {
@@ -130,17 +145,20 @@ export function DashboardShell({ children }: DashboardShellProps) {
           </div>
 
           <nav className="space-y-1 lg:pt-4" aria-label={`${context.label} dashboard`}>
-            <Link
-              href={context.home}
-              onClick={() => setMenuOpen(false)}
-              className={`block rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
-                pathname === context.home
-                  ? "bg-emerald-50 text-emerald-800"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
-              }`}
-            >
-              {context.homeLabel}
-            </Link>
+            {context.navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className={`block rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
+                  isActivePath(pathname, item)
+                    ? "bg-emerald-50 text-emerald-800"
+                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
               href="/services"
               onClick={() => setMenuOpen(false)}
