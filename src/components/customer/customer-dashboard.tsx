@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { BookingStatusBadge } from "@/components/customer/booking-status-badge";
+import { ReviewDialog } from "@/components/customer/review-dialog";
 import { useToast } from "@/components/providers/toast-provider";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { apiRequest } from "@/lib/api/client";
 import { getApiErrorMessage } from "@/lib/api/errors";
-import type { CustomerBooking, PaginationMeta } from "@/types/api";
+import type { CustomerBooking, CustomerReview, PaginationMeta } from "@/types/api";
 
 const defaultMeta: PaginationMeta = {
   page: 1,
@@ -64,6 +65,10 @@ export function CustomerDashboard() {
   const [cancelReason, setCancelReason] = useState(
     "My schedule has changed.",
   );
+  const [reviewTarget, setReviewTarget] = useState<CustomerBooking | null>(null);
+  const [submittingReviewId, setSubmittingReviewId] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!isReady || !session || session.user.role !== "CUSTOMER") {
@@ -116,8 +121,11 @@ export function CustomerDashboard() {
     const awaitingPayment = bookings.filter(
       (booking) => booking.status === "ACCEPTED",
     ).length;
+    const awaitingReview = bookings.filter(
+      (booking) => booking.status === "COMPLETED" && !booking.review,
+    ).length;
 
-    return { active, completed, awaitingPayment };
+    return { active, completed, awaitingPayment, awaitingReview };
   }, [bookings]);
 
   function openCancelDialog(booking: CustomerBooking) {
@@ -179,6 +187,54 @@ export function CustomerDashboard() {
     }
   }
 
+  async function submitReview(rating: number, comment: string) {
+    if (!session || !reviewTarget || reviewTarget.status !== "COMPLETED") {
+      return;
+    }
+
+    if (rating < 1 || rating > 5) {
+      toast("Please select a rating from 1 to 5.", "error");
+      return;
+    }
+
+    const bookingId = reviewTarget.id;
+    setSubmittingReviewId(bookingId);
+
+    try {
+      const response = await apiRequest<CustomerReview>("/api/reviews", {
+        method: "POST",
+        token: session.token,
+        body: {
+          bookingId,
+          rating,
+          comment: comment || null,
+        },
+      });
+
+      setBookings((current) =>
+        current.map((booking) =>
+          booking.id === bookingId
+            ? {
+                ...booking,
+                review: {
+                  id: response.data.id,
+                  rating: response.data.rating,
+                  comment: response.data.comment,
+                  createdAt: response.data.createdAt,
+                },
+              }
+            : booking,
+        ),
+      );
+      setReviewTarget(null);
+      toast("Review submitted successfully.", "success");
+    } catch (error) {
+      toast(getApiErrorMessage(error), "error");
+    } finally {
+      setSubmittingReviewId(null);
+    }
+  }
+
   function changePage(nextPage: number) {
     setLoading(true);
     setPage(nextPage);
@@ -196,8 +252,8 @@ export function CustomerDashboard() {
               Your service bookings
             </h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-              Follow technician responses, cancel eligible requests and continue
-              accepted bookings to payment.
+              Follow technician responses, complete accepted payments and review
+              technicians after finished jobs.
             </p>
           </div>
           <Link
@@ -209,10 +265,11 @@ export function CustomerDashboard() {
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-3">
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {[
           { label: "Active bookings", value: summary.active },
           { label: "Awaiting payment", value: summary.awaitingPayment },
+          { label: "Awaiting review", value: summary.awaitingReview },
           { label: "Completed", value: summary.completed },
         ].map((item) => (
           <div
@@ -326,6 +383,30 @@ export function CustomerDashboard() {
                   </p>
                 ) : null}
 
+                {booking.review ? (
+                  <div className="mt-4 rounded-xl border border-amber-100 bg-amber-50/60 px-4 py-3">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="text-sm font-semibold text-slate-800">
+                        Your review
+                      </p>
+                      <span
+                        className="text-sm tracking-wide text-amber-500"
+                        aria-label={`${booking.review.rating} out of 5 stars`}
+                      >
+                        {"★".repeat(booking.review.rating)}
+                        <span className="text-slate-300">
+                          {"★".repeat(5 - booking.review.rating)}
+                        </span>
+                      </span>
+                    </div>
+                    {booking.review.comment ? (
+                      <p className="mt-1.5 text-sm leading-6 text-slate-600">
+                        {booking.review.comment}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+
                 <div className="mt-5 flex flex-wrap items-center gap-2">
                   {booking.status === "ACCEPTED" ? (
                     <Link
@@ -343,6 +424,16 @@ export function CustomerDashboard() {
                     >
                       View payment
                     </Link>
+                  ) : null}
+
+                  {booking.status === "COMPLETED" && !booking.review ? (
+                    <button
+                      type="button"
+                      onClick={() => setReviewTarget(booking)}
+                      className="rounded-xl bg-emerald-600 px-3.5 py-2 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                    >
+                      Leave review
+                    </button>
                   ) : null}
 
                   {isCancellable(booking.status) ? (
@@ -387,6 +478,20 @@ export function CustomerDashboard() {
           </div>
         ) : null}
       </section>
+
+      {reviewTarget ? (
+        <ReviewDialog
+          key={reviewTarget.id}
+          booking={reviewTarget}
+          submitting={submittingReviewId === reviewTarget.id}
+          onClose={() => {
+            if (!submittingReviewId) {
+              setReviewTarget(null);
+            }
+          }}
+          onSubmit={(rating, comment) => void submitReview(rating, comment)}
+        />
+      ) : null}
 
       {cancelTarget ? (
         <div

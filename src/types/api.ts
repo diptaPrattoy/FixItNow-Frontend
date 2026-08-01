@@ -229,9 +229,16 @@ export type CustomerBooking = {
     id: string;
     rating: number;
     comment: string | null;
+    createdAt?: string;
   } | null;
 };
 
+export type CustomerReview = {
+  id: string;
+  rating: number;
+  comment: string | null;
+  createdAt: string;
+};
 
 export type TechnicianPrivateProfile = {
   id: string;

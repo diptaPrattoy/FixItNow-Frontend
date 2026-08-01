@@ -28,6 +28,7 @@ Browser API requests read `NEXT_PUBLIC_API_URL`. Server-side SSLCommerz callback
 | `/dashboard/customer/payments` payment history | `GET /api/payments` | Implemented |
 | Frontend SSLCommerz callback proxies | Backend `POST /api/payments/success`, `/fail`, `/cancel`, `/ipn` | Implemented |
 | `/payment/success`, `/payment/cancel` | SSLCommerz result UI | Implemented |
+| Completed booking review dialog | `POST /api/reviews` | Implemented |
 | Technician profile workspace | `GET /api/technician/profile`, `PUT /api/technician/profile` | Implemented |
 | Technician service management | `GET`, `POST`, `PATCH`, `DELETE /api/technician/services` | Implemented |
 | Technician service category selector | `GET /api/categories` | Implemented |
@@ -51,7 +52,6 @@ The backend Render environment variable `APP_BASE_URL` must therefore point to t
 
 | Frontend route | Backend endpoint |
 | --- | --- |
-| Completed-booking review UI | `POST /api/reviews` |
 | `/dashboard/admin` | `GET /api/admin/users`, `GET /api/admin/bookings` |
 | `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |
 
