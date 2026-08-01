@@ -58,14 +58,14 @@ const content: Record<
       "User moderation, booking oversight and category management will be available from this protected workspace.",
     actions: [
       {
-        href: "/services",
-        label: "Review service catalogue",
-        detail: "Check the public marketplace experience.",
+        href: "/dashboard/admin/users",
+        label: "Manage users",
+        detail: "Search accounts and control platform access.",
       },
       {
-        href: "/technicians",
-        label: "Review technicians",
-        detail: "Inspect the public technician directory.",
+        href: "/services",
+        label: "Review marketplace",
+        detail: "Check the customer-facing service catalogue.",
       },
     ],
   },

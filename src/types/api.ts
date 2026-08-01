@@ -55,6 +55,32 @@ export type PaginationMeta = {
   hasPreviousPage: boolean;
 };
 
+
+export type AdminUser = {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  avatarUrl: string | null;
+  role: UserRole;
+  status: UserStatus;
+  createdAt: string;
+  updatedAt: string;
+  technicianProfile: {
+    id: string;
+    location: string;
+    experienceYears: number;
+    averageRating: string;
+    reviewCount: number;
+    isVerified: boolean;
+  } | null;
+  _count: {
+    customerBookings: number;
+    payments: number;
+    reviews: number;
+  };
+};
+
 export type Category = {
   id: string;
   name: string;

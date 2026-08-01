@@ -57,7 +57,10 @@ const dashboards: Record<string, DashboardContext> = {
     label: "Admin",
     home: "/dashboard/admin",
     description: "Review users, bookings and service categories.",
-    navigation: [{ href: "/dashboard/admin", label: "Overview" }],
+    navigation: [
+      { href: "/dashboard/admin", label: "Overview" },
+      { href: "/dashboard/admin/users", label: "Users" },
+    ],
   },
 };
 
