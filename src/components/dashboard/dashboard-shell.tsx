@@ -210,7 +210,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:py-8">
+    <section className="relative isolate mx-auto w-full max-w-7xl overflow-hidden px-4 pb-28 pt-6 sm:px-6 lg:px-8 lg:py-8">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-56 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.16),_transparent_38%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.10),_transparent_28%)]" />
       <div className="mb-5 flex items-center justify-between gap-4 lg:hidden">
         <div className="flex min-w-0 items-center gap-3">
           <UserAvatar
@@ -229,7 +230,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
         <button
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
-          className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700"
+          className="rounded-xl border border-emerald-200 bg-emerald-50/80 px-3 py-2 text-sm font-semibold text-emerald-900 shadow-sm"
           aria-expanded={menuOpen}
           aria-controls="dashboard-navigation"
         >
@@ -240,9 +241,9 @@ export function DashboardShell({ children }: DashboardShellProps) {
       <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
         <aside
           id="dashboard-navigation"
-          className={`${menuOpen ? "block" : "hidden"} h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:block`}
+          className={`${menuOpen ? "block" : "hidden"} dashboard-surface h-fit rounded-[24px] border border-emerald-100 bg-gradient-to-b from-white via-emerald-50/70 to-white p-4 shadow-sm lg:sticky lg:top-24 lg:block`}
         >
-          <div className="hidden border-b border-slate-100 px-2 pb-4 lg:block">
+          <div className="hidden border-b border-emerald-100 px-2 pb-4 lg:block">
             <div className="flex items-center gap-3">
               <UserAvatar
                 name={session.user.name}
@@ -257,7 +258,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 <p className="mt-1 truncate font-semibold text-slate-950">{session.user.name}</p>
               </div>
             </div>
-            <p className="mt-3 text-sm leading-6 text-slate-500">{context.description}</p>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{context.description}</p>
           </div>
 
           <nav className="space-y-1 lg:pt-4" aria-label={`${context.label} dashboard`}>
@@ -271,8 +272,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition ${
                     active
-                      ? "bg-emerald-50 text-emerald-800"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-950"
+                      ? "bg-emerald-600 text-white shadow-sm shadow-emerald-600/20"
+                      : "text-slate-700 hover:bg-white hover:text-emerald-900 hover:shadow-sm"
                   }`}
                 >
                   <DashboardIcon name={item.icon} />
@@ -280,18 +281,18 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 </Link>
               );
             })}
-            <div className="my-2 border-t border-slate-100" />
+            <div className="my-2 border-t border-emerald-100" />
             <Link
               href="/services"
               onClick={() => setMenuOpen(false)}
-              className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-950"
+              className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-emerald-900 hover:shadow-sm"
             >
               Browse services
             </Link>
             <Link
               href="/technicians"
               onClick={() => setMenuOpen(false)}
-              className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-950"
+              className="block rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-emerald-900 hover:shadow-sm"
             >
               View technicians
             </Link>
@@ -300,7 +301,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
           <button
             type="button"
             onClick={handleLogout}
-            className="mt-4 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-left text-sm font-semibold text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700"
+            className="mt-4 w-full rounded-xl border border-slate-200/80 bg-white/90 px-3 py-2.5 text-left text-sm font-semibold text-slate-700 transition hover:border-red-200 hover:bg-red-50 hover:text-red-700"
           >
             Log out
           </button>
@@ -310,7 +311,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
       </div>
 
       <nav
-        className="fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-lg items-stretch justify-around gap-1 rounded-2xl border border-slate-200 bg-white/95 px-2 pt-2 shadow-2xl shadow-slate-950/15 backdrop-blur-xl lg:hidden"
+        className="fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-lg items-stretch justify-around gap-1 rounded-2xl border border-emerald-100 bg-white/92 px-2 pt-2 shadow-2xl shadow-emerald-950/10 backdrop-blur-xl lg:hidden"
         style={{ paddingBottom: "calc(0.5rem + env(safe-area-inset-bottom))" }}
         aria-label={`${context.label} mobile dashboard`}
       >
@@ -323,8 +324,8 @@ export function DashboardShell({ children }: DashboardShellProps) {
               aria-current={active ? "page" : undefined}
               className={`flex min-w-0 flex-1 flex-col items-center gap-1 rounded-xl px-1.5 py-2 text-[0.68rem] font-semibold transition ${
                 active
-                  ? "bg-emerald-50 text-emerald-800"
-                  : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                  ? "bg-emerald-600 text-white shadow-sm shadow-emerald-600/20"
+                  : "text-slate-600 hover:bg-white hover:text-emerald-900"
               }`}
             >
               <DashboardIcon name={item.icon} />

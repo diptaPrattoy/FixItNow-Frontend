@@ -242,7 +242,7 @@ export function CustomerDashboard() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <section className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
@@ -267,14 +267,14 @@ export function CustomerDashboard() {
 
       <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {[
-          { label: "Active bookings", value: summary.active },
-          { label: "Awaiting payment", value: summary.awaitingPayment },
-          { label: "Awaiting review", value: summary.awaitingReview },
-          { label: "Completed", value: summary.completed },
+          { label: "Active bookings", value: summary.active, className: "dashboard-tint-card" },
+          { label: "Awaiting payment", value: summary.awaitingPayment, className: "dashboard-soft-accent" },
+          { label: "Awaiting review", value: summary.awaitingReview, className: "dashboard-warm-card" },
+          { label: "Completed", value: summary.completed, className: "dashboard-surface" },
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-2xl border border-slate-200 bg-white p-5"
+            className={`${item.className} rounded-2xl p-5`}
           >
             <p className="text-sm text-slate-500">{item.label}</p>
             <p className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
@@ -309,7 +309,7 @@ export function CustomerDashboard() {
         {loading ? <BookingSkeleton /> : null}
 
         {!loading && bookings.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+          <div className="dashboard-surface rounded-2xl border border-dashed border-emerald-200 px-6 py-12 text-center">
             <h3 className="font-semibold text-slate-950">No bookings yet</h3>
             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-600">
               Open a technician profile, select an available time and send your
@@ -329,7 +329,7 @@ export function CustomerDashboard() {
             {bookings.map((booking) => (
               <article
                 key={booking.id}
-                className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6"
+                className="dashboard-surface rounded-2xl p-5 sm:p-6"
               >
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                   <div>
@@ -462,7 +462,7 @@ export function CustomerDashboard() {
         ) : null}
 
         {!loading && meta.totalPages > 1 ? (
-          <div className="mt-5 flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3">
+          <div className="dashboard-surface mt-5 flex items-center justify-between rounded-2xl px-4 py-3">
             <button
               type="button"
               onClick={() => changePage(page - 1)}

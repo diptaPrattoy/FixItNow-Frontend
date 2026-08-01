@@ -361,7 +361,7 @@ export function TechnicianAvailability() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <section className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
@@ -398,15 +398,15 @@ export function TechnicianAvailability() {
       </section>
 
       <section className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-tint-card rounded-2xl p-5">
           <p className="text-sm text-slate-500">Available slots</p>
           <p className="mt-2 text-3xl font-bold text-slate-950">{summary.available}</p>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-soft-accent rounded-2xl p-5">
           <p className="text-sm text-slate-500">Booked slots</p>
           <p className="mt-2 text-3xl font-bold text-slate-950">{summary.booked}</p>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-warm-card rounded-2xl p-5">
           <p className="text-sm text-slate-500">Next working time</p>
           <p className="mt-2 text-base font-bold text-slate-950">
             {summary.next ? formatDay(summary.next.startTime) : "No upcoming slot"}
@@ -420,7 +420,7 @@ export function TechnicianAvailability() {
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
-        <section className="h-fit rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <section className="dashboard-surface h-fit rounded-2xl p-5 sm:p-6">
           <div className="border-b border-slate-100 pb-4">
             <h2 className="text-lg font-bold text-slate-950">Schedule by day</h2>
             <p className="mt-1 text-sm leading-6 text-slate-500">
@@ -473,7 +473,7 @@ export function TechnicianAvailability() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <section className="dashboard-surface rounded-2xl p-5 sm:p-6">
           <div className="flex flex-col justify-between gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center">
             <div>
               <h2 className="text-lg font-bold text-slate-950">

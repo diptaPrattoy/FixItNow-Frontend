@@ -439,7 +439,7 @@ export function TechnicianProfileServices() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <section className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <div className="flex min-w-0 items-center gap-4">
             <UserAvatar
@@ -484,17 +484,17 @@ export function TechnicianProfileServices() {
       </section>
 
       <section className="grid gap-3 sm:grid-cols-3">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-tint-card rounded-2xl p-5">
           <p className="text-sm text-slate-500">Active services</p>
           <p className="mt-2 text-3xl font-bold text-slate-950">{summary.active}</p>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-soft-accent rounded-2xl p-5">
           <p className="text-sm text-slate-500">Average rating</p>
           <p className="mt-2 text-3xl font-bold text-slate-950">
             {Number(profile?.averageRating ?? 0).toFixed(1)}
           </p>
         </div>
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+        <div className="dashboard-warm-card rounded-2xl p-5">
           <p className="text-sm text-slate-500">Customer reviews</p>
           <p className="mt-2 text-3xl font-bold text-slate-950">
             {profile?.reviewCount ?? 0}
@@ -503,7 +503,7 @@ export function TechnicianProfileServices() {
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-        <section className="h-fit rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <section className="dashboard-surface h-fit rounded-2xl p-5 sm:p-6">
           <div className="border-b border-slate-100 pb-4">
             <h2 className="text-xl font-bold text-slate-950">Public profile</h2>
             <p className="mt-1 text-sm leading-6 text-slate-500">
@@ -550,7 +550,7 @@ export function TechnicianProfileServices() {
           </form>
         </section>
 
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+        <section className="dashboard-surface rounded-2xl p-5 sm:p-6">
           <div className="flex flex-col justify-between gap-4 border-b border-slate-100 pb-4 sm:flex-row sm:items-center">
             <div>
               <h2 className="text-xl font-bold text-slate-950">Your services</h2>

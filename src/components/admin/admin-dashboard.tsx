@@ -87,28 +87,38 @@ export function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <section className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">Admin overview</p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">Platform activity at a glance</h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">Monitor account growth, current work, completed jobs and verified payment activity from live backend data.</p>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {cards.map((card) => (
-          <div key={card.label} className="rounded-2xl border border-slate-200 bg-white p-5">
-            <p className="text-sm text-slate-500">{card.label}</p>
-            <p className="mt-3 text-2xl font-bold tracking-tight text-slate-950">{loading ? "—" : card.value}</p>
-          </div>
-        ))}
+        {cards.map((card, index) => {
+          const className = index === 0
+            ? "dashboard-tint-card"
+            : index === 1
+              ? "dashboard-soft-accent"
+              : index === 2
+                ? "dashboard-warm-card"
+                : "dashboard-surface";
+
+          return (
+            <div key={card.label} className={`${className} rounded-2xl p-5`}>
+              <p className="text-sm text-slate-500">{card.label}</p>
+              <p className="mt-3 text-2xl font-bold tracking-tight text-slate-950">{loading ? "—" : card.value}</p>
+            </div>
+          );
+        })}
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <Link href="/dashboard/admin/users" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage users</p><p className="mt-2 text-sm leading-6 text-slate-600">Search accounts and control customer or technician access.</p></Link>
-        <Link href="/dashboard/admin/bookings" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Review bookings</p><p className="mt-2 text-sm leading-6 text-slate-600">Inspect every request, payment state and service outcome.</p></Link>
-        <Link href="/dashboard/admin/categories" className="rounded-2xl border border-slate-200 bg-white p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage categories</p><p className="mt-2 text-sm leading-6 text-slate-600">Create service groups and control which categories stay active.</p></Link>
+        <Link href="/dashboard/admin/users" className="dashboard-surface rounded-2xl p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage users</p><p className="mt-2 text-sm leading-6 text-slate-600">Search accounts and control customer or technician access.</p></Link>
+        <Link href="/dashboard/admin/bookings" className="dashboard-surface rounded-2xl p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Review bookings</p><p className="mt-2 text-sm leading-6 text-slate-600">Inspect every request, payment state and service outcome.</p></Link>
+        <Link href="/dashboard/admin/categories" className="dashboard-surface rounded-2xl p-5 transition hover:border-emerald-200 hover:shadow-sm"><p className="font-semibold text-slate-950">Manage categories</p><p className="mt-2 text-sm leading-6 text-slate-600">Create service groups and control which categories stay active.</p></Link>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+      <section className="dashboard-surface rounded-2xl p-5 sm:p-6">
         <div className="flex items-center justify-between gap-4"><div><h2 className="text-lg font-bold text-slate-950">Recent bookings</h2><p className="mt-1 text-sm text-slate-500">Showing the latest activity from {bookingMeta?.total ?? 0} total bookings.</p></div><Link href="/dashboard/admin/bookings" className="text-sm font-semibold text-emerald-700 hover:text-emerald-800">View all</Link></div>
         <div className="mt-5 space-y-3">
           {loading ? Array.from({ length: 4 }).map((_, index) => <div key={index} className="h-20 animate-pulse rounded-xl bg-slate-100" />) : bookings.slice(0, 5).map((booking) => (

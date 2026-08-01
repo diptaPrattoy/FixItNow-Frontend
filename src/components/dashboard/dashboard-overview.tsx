@@ -76,7 +76,7 @@ export function DashboardOverview({ role }: DashboardOverviewProps) {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <div className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
           {dashboard.eyebrow}
         </p>
@@ -93,7 +93,7 @@ export function DashboardOverview({ role }: DashboardOverviewProps) {
           <Link
             key={action.href}
             href={action.href}
-            className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-sm"
+            className="group dashboard-surface rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-sm"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -112,7 +112,7 @@ export function DashboardOverview({ role }: DashboardOverviewProps) {
         ))}
       </div>
 
-      <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-5">
+      <div className="dashboard-soft-accent rounded-2xl p-5">
         <p className="text-sm font-semibold text-emerald-950">Protected workspace</p>
         <p className="mt-1 text-sm leading-6 text-emerald-900/75">
           Dashboard routes are restricted by the active session and account role. Backend authorization remains the source of truth for every protected API request.

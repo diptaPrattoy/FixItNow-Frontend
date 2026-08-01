@@ -96,7 +96,7 @@ function BookingSkeleton() {
 
 function EmptyBookings({ filtered }: { filtered: boolean }) {
   return (
-    <div className="rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
+    <div className="dashboard-surface rounded-2xl border border-dashed border-emerald-200 px-6 py-14 text-center">
       <p className="text-lg font-semibold text-slate-950">
         {filtered ? "No bookings match this status" : "No booking requests yet"}
       </p>
@@ -337,7 +337,7 @@ export function TechnicianBookings() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8">
+      <section className="dashboard-tint-card rounded-[28px] p-6 sm:p-8">
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700">
