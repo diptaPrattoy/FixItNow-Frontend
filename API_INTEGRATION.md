@@ -22,6 +22,7 @@ Browser API requests read `NEXT_PUBLIC_API_URL`. Server-side SSLCommerz callback
 | `/technicians/[id]` public profile | `GET /api/technicians/:id` | Implemented |
 | Technician profile booking form | `POST /api/bookings` | Implemented |
 | `/dashboard/customer` booking history | `GET /api/bookings` | Implemented |
+| `/dashboard/customer/bookings/[id]` tracking details | `GET /api/bookings/:id` | Implemented |
 | Customer booking cancellation | `PATCH /api/bookings/:id/cancel` | Implemented |
 | `/dashboard/customer/bookings/[id]/pay` booking review | `GET /api/bookings/:id` | Implemented |
 | `/dashboard/customer/bookings/[id]/pay` checkout initiation | `POST /api/payments/create` | Implemented |

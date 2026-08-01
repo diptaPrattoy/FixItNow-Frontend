@@ -408,6 +408,13 @@ export function CustomerDashboard() {
                 ) : null}
 
                 <div className="mt-5 flex flex-wrap items-center gap-2">
+                  <Link
+                    href={`/dashboard/customer/bookings/${booking.id}`}
+                    className="rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700"
+                  >
+                    View details
+                  </Link>
+
                   {booking.status === "ACCEPTED" ? (
                     <Link
                       href={`/dashboard/customer/bookings/${booking.id}/pay`}
