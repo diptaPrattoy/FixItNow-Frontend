@@ -33,3 +33,7 @@ All request failures are normalized by `src/lib/api/client.ts` and displayed thr
 | `/dashboard/admin` | `GET /api/admin/users`, `GET /api/admin/bookings` |
 | `/dashboard/admin/categories` | `GET /api/admin/categories`, `POST /api/admin/categories`, `PATCH /api/admin/categories/:id` |
 | `/payment/success`, `/payment/cancel` | SSLCommerz redirect result UI |
+
+## Route protection
+
+Authenticated dashboard routes are guarded by `src/proxy.ts` using a lightweight session marker and role cookie. A client-side dashboard guard also checks the locally stored authenticated user before rendering a role workspace. Backend JWT authorization remains authoritative for protected API calls.

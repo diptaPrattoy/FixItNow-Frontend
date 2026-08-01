@@ -2,17 +2,18 @@
 
 A responsive Next.js App Router frontend for the FixItNow home service marketplace.
 
-## Commit 3 scope
+## Overview
 
-- Live public service browsing from the FixItNow backend
-- Category, location, rating and price filters
-- Responsive filter panel and pagination
-- Live technician discovery with search and sorting
-- Public technician profile with services, availability and reviews
-- Skeleton, empty and route-level error states
-- Toast feedback for API and network failures
-- Mobile navigation menu
-- Local and Vercel environment setup guide
+FixItNow connects customers with local service professionals. The frontend supports public service discovery, technician profiles, JWT-based authentication, role-aware navigation and protected Customer, Technician and Admin workspaces.
+
+## Technology
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- Custom JWT session handling
+- Next.js Proxy for optimistic route protection
+- Toast-based API feedback
 
 ## Getting started
 

@@ -2,16 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useToast } from "@/components/providers/toast-provider";
 import { BrandLogo } from "@/components/shared/brand-logo";
-import {
-  clearAuthSession,
-  getAuthSession,
-  getDashboardPath,
-  type AuthSession,
-} from "@/lib/auth/session";
+import { useAuthSession } from "@/hooks/use-auth-session";
+import { clearAuthSession, getDashboardPath } from "@/lib/auth/session";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -22,25 +18,12 @@ const links = [
 export function SiteHeader() {
   const { toast } = useToast();
   const router = useRouter();
-  const [session, setSession] = useState<AuthSession | null>(null);
+  const { session } = useAuthSession();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const syncSession = () => setSession(getAuthSession());
-    syncSession();
-    window.addEventListener("fixitnow:auth-change", syncSession);
-    window.addEventListener("storage", syncSession);
-
-    return () => {
-      window.removeEventListener("fixitnow:auth-change", syncSession);
-      window.removeEventListener("storage", syncSession);
-    };
-  }, []);
 
 
   function handleLogout() {
     clearAuthSession();
-    setSession(null);
     setMenuOpen(false);
     toast("You have been logged out.", "success");
     router.push("/");

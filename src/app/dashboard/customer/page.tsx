@@ -1,5 +1,11 @@
-import { DashboardPlaceholder } from "@/components/dashboard/dashboard-placeholder";
+import type { Metadata } from "next";
+
+import { DashboardOverview } from "@/components/dashboard/dashboard-overview";
+
+export const metadata: Metadata = {
+  title: "Customer Dashboard",
+};
 
 export default function CustomerDashboardPage() {
-  return <DashboardPlaceholder role="Customer" />;
+  return <DashboardOverview role="CUSTOMER" />;
 }
