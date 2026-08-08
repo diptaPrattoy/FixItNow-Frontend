@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { FeaturedServices } from "@/components/home/featured-services";
 import { ServiceSearch } from "@/components/home/service-search";
+import ContactPage from "./contact/page";
 
 const categories = [
   {
@@ -45,24 +46,28 @@ const steps = [
   {
     number: "03",
     title: "Track the whole job",
-    description: "Pay securely, follow progress and leave a review when it is done.",
+    description:
+      "Pay securely, follow progress and leave a review when it is done.",
   },
 ];
 
 const assurances = [
   {
     title: "Clear service details",
-    description: "See the price, duration and technician profile before sending a request.",
+    description:
+      "See the price, duration and technician profile before sending a request.",
     icon: "document",
   },
   {
     title: "Secure online payment",
-    description: "Complete accepted bookings through the SSLCommerz checkout flow.",
+    description:
+      "Complete accepted bookings through the SSLCommerz checkout flow.",
     icon: "shield",
   },
   {
     title: "Status at every stage",
-    description: "Follow requests from acceptance and payment through job completion.",
+    description:
+      "Follow requests from acceptance and payment through job completion.",
     icon: "status",
   },
 ];
@@ -166,22 +171,29 @@ export default function HomePage() {
               Trusted help for the jobs that keep your home running.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Compare local technicians, choose an available time and manage the service from request to completion in one place.
+              Compare local technicians, choose an available time and manage the
+              service from request to completion in one place.
             </p>
 
             <ServiceSearch />
 
             <div className="mt-6 flex flex-wrap gap-x-7 gap-y-3 text-sm font-medium text-slate-600">
               <span className="inline-flex items-center gap-2">
-                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">✓</span>
+                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">
+                  ✓
+                </span>
                 Technician profiles
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">✓</span>
+                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">
+                  ✓
+                </span>
                 Real availability
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">✓</span>
+                <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-xs text-emerald-700">
+                  ✓
+                </span>
                 SSLCommerz checkout
               </span>
             </div>
@@ -191,14 +203,28 @@ export default function HomePage() {
             <div className="absolute -left-6 top-16 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/10 sm:block">
               <div className="flex items-center gap-3">
                 <span className="grid size-10 place-items-center rounded-xl bg-emerald-100 text-emerald-700">
-                  <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="m9 12 2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="size-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  >
+                    <path
+                      d="m9 12 2 2 4-4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                     <circle cx="12" cy="12" r="9" />
                   </svg>
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Booking update</p>
-                  <p className="mt-0.5 text-sm font-bold text-slate-900">Request accepted</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+                    Booking update
+                  </p>
+                  <p className="mt-0.5 text-sm font-bold text-slate-900">
+                    Request accepted
+                  </p>
                 </div>
               </div>
             </div>
@@ -213,9 +239,15 @@ export default function HomePage() {
             />
 
             <div className="absolute -bottom-3 right-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/10 sm:bottom-5 sm:right-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">Available slots</p>
-              <p className="mt-1 text-sm font-bold text-slate-900">See times before booking</p>
-              <p className="mt-1 text-xs text-emerald-700">Choose what fits your day</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+                Available slots
+              </p>
+              <p className="mt-1 text-sm font-bold text-slate-900">
+                See times before booking
+              </p>
+              <p className="mt-1 text-xs text-emerald-700">
+                Choose what fits your day
+              </p>
             </div>
           </div>
         </div>
@@ -224,13 +256,18 @@ export default function HomePage() {
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl divide-y divide-slate-200 px-4 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-6 lg:px-8">
           {assurances.map((item) => (
-            <article key={item.title} className="flex gap-4 py-7 sm:px-6 sm:first:pl-0 sm:last:pr-0">
+            <article
+              key={item.title}
+              className="flex gap-4 py-7 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+            >
               <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-700">
                 <AssuranceIcon name={item.icon} />
               </span>
               <div>
                 <h2 className="font-bold text-slate-900">{item.title}</h2>
-                <p className="mt-1 text-sm leading-6 text-slate-500">{item.description}</p>
+                <p className="mt-1 text-sm leading-6 text-slate-500">
+                  {item.description}
+                </p>
               </div>
             </article>
           ))}
@@ -247,7 +284,10 @@ export default function HomePage() {
               Start with what needs attention
             </h2>
           </div>
-          <Link href="/services" className="font-semibold text-emerald-700 transition hover:text-emerald-800">
+          <Link
+            href="/services"
+            className="font-semibold text-emerald-700 transition hover:text-emerald-800"
+          >
             See every service →
           </Link>
         </div>
@@ -262,9 +302,15 @@ export default function HomePage() {
               <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-600 group-hover:text-white">
                 <CategoryIcon name={category.icon} />
               </span>
-              <h3 className="mt-5 text-lg font-bold text-slate-950">{category.name}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500">{category.detail}</p>
-              <span className="mt-5 inline-flex text-sm font-semibold text-emerald-700">Explore →</span>
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                {category.name}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                {category.detail}
+              </p>
+              <span className="mt-5 inline-flex text-sm font-semibold text-emerald-700">
+                Explore →
+              </span>
             </Link>
           ))}
         </div>
@@ -272,28 +318,41 @@ export default function HomePage() {
 
       <FeaturedServices />
 
-      <section id="how-it-works" className="border-y border-slate-200 bg-[#f6f8f7]">
+      <section
+        id="how-it-works"
+        className="border-y border-slate-200 bg-[#f6f8f7]"
+      >
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">How it works</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                How it works
+              </p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
                 A straightforward path from problem to solution
               </h2>
               <p className="mt-4 leading-7 text-slate-600">
-                FixItNow keeps the technician, time slot, payment and job status connected to one booking.
+                FixItNow keeps the technician, time slot, payment and job status
+                connected to one booking.
               </p>
             </div>
 
             <div className="grid gap-4">
               {steps.map((step) => (
-                <article key={step.number} className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:grid-cols-[64px_1fr] sm:items-start sm:p-6">
+                <article
+                  key={step.number}
+                  className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:grid-cols-[64px_1fr] sm:items-start sm:p-6"
+                >
                   <span className="grid size-12 place-items-center rounded-full border border-emerald-200 bg-emerald-50 text-sm font-black text-emerald-700">
                     {step.number}
                   </span>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-950">{step.title}</h3>
-                    <p className="mt-2 leading-7 text-slate-600">{step.description}</p>
+                    <h3 className="text-lg font-bold text-slate-950">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 leading-7 text-slate-600">
+                      {step.description}
+                    </p>
                   </div>
                 </article>
               ))}
@@ -305,10 +364,15 @@ export default function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-12 text-white sm:px-10 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:px-14">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-400">For service professionals</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Turn your skills into a clear, bookable service.</h2>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-400">
+              For service professionals
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              Turn your skills into a clear, bookable service.
+            </h2>
             <p className="mt-4 leading-7 text-slate-300">
-              Create your technician profile, publish services, set working hours and manage incoming jobs from one dashboard.
+              Create your technician profile, publish services, set working
+              hours and manage incoming jobs from one dashboard.
             </p>
           </div>
           <Link
@@ -318,6 +382,9 @@ export default function HomePage() {
             Join as a technician
           </Link>
         </div>
+      </section>
+      <section>
+        <ContactPage />
       </section>
     </>
   );

@@ -14,6 +14,7 @@ const links = [
   { href: "/services", label: "Services" },
   { href: "/technicians", label: "Technicians" },
   { href: "/#how-it-works", label: "How it works" },
+  { href: "/contact", label: "Contact" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -23,11 +24,25 @@ function isActive(pathname: string, href: string) {
 
 function MenuIcon({ open }: { open: boolean }) {
   return open ? (
-    <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      className="size-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden="true"
+    >
       <path d="m6 6 12 12M18 6 6 18" strokeLinecap="round" />
     </svg>
   ) : (
-    <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      className="size-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden="true"
+    >
       <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
     </svg>
   );
@@ -53,7 +68,10 @@ export function SiteHeader() {
       <div className="mx-auto flex min-h-18 max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <BrandLogo />
 
-        <nav className="hidden items-center gap-2 md:flex" aria-label="Main navigation">
+        <nav
+          className="hidden items-center gap-2 md:flex"
+          aria-label="Main navigation"
+        >
           {links.map((link) => {
             const active = isActive(pathname, link.href);
             return (
@@ -98,10 +116,16 @@ export function SiteHeader() {
             </>
           ) : (
             <>
-              <Link href="/auth/login" className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100">
+              <Link
+                href="/auth/login"
+                className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+              >
                 Log in
               </Link>
-              <Link href="/auth/register" className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700">
+              <Link
+                href="/auth/register"
+                className="rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
+              >
                 Get started
               </Link>
             </>
@@ -121,8 +145,14 @@ export function SiteHeader() {
       </div>
 
       {menuOpen ? (
-        <div id="mobile-site-navigation" className="border-t border-slate-100 bg-white px-4 py-4 shadow-lg shadow-slate-950/5 md:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col gap-1" aria-label="Mobile navigation">
+        <div
+          id="mobile-site-navigation"
+          className="border-t border-slate-100 bg-white px-4 py-4 shadow-lg shadow-slate-950/5 md:hidden"
+        >
+          <nav
+            className="mx-auto flex max-w-7xl flex-col gap-1"
+            aria-label="Mobile navigation"
+          >
             {links.map((link) => {
               const active = isActive(pathname, link.href);
               return (
@@ -152,8 +182,12 @@ export function SiteHeader() {
                     className="rounded-xl"
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-slate-900">{session.user.name}</p>
-                    <p className="text-xs capitalize text-slate-500">{session.user.role.toLowerCase()} account</p>
+                    <p className="truncate text-sm font-semibold text-slate-900">
+                      {session.user.name}
+                    </p>
+                    <p className="text-xs capitalize text-slate-500">
+                      {session.user.role.toLowerCase()} account
+                    </p>
                   </div>
                 </div>
                 <Link
@@ -163,7 +197,11 @@ export function SiteHeader() {
                 >
                   Open dashboard
                 </Link>
-                <button type="button" onClick={handleLogout} className="rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50"
+                >
                   Log out
                 </button>
               </>

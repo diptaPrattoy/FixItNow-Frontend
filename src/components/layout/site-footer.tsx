@@ -20,6 +20,10 @@ export function SiteFooter() {
           <Link href="/technicians" className="hover:text-emerald-700">
             Technicians
           </Link>
+
+          <Link href="/contact" className="hover:text-emerald-700">
+            Contact
+          </Link>
           <Link href="/auth/login" className="hover:text-emerald-700">
             Log in
           </Link>
