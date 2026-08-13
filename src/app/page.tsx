@@ -318,6 +318,140 @@ export default function HomePage() {
 
       <FeaturedServices />
 
+      {/* Why FixItNow */}
+      <section className="border-y border-slate-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          {/* Section Header */}
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">
+              Why FixItNow
+            </p>
+
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+              A better way to manage home services
+            </h2>
+
+            <p className="mt-4 leading-7 text-slate-600">
+              Everything you need to find the right professional, book with
+              confidence and keep track of your service from start to finish.
+            </p>
+          </div>
+
+          {/* Features */}
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Professional Technicians */}
+            <article className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-slate-950/5">
+              <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-600 group-hover:text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="8" r="3" />
+                  <path d="M5 21a7 7 0 0 1 14 0" />
+                </svg>
+              </span>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                Professional technicians
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                Explore technician profiles, skills, ratings and service details
+                before making your choice.
+              </p>
+            </article>
+
+            {/* Flexible Scheduling */}
+            <article className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-slate-950/5">
+              <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-600 group-hover:text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="17" rx="2" />
+                  <path d="M16 2v4M8 2v4M3 9h18" />
+                  <path d="M12 13v3l2 1" />
+                </svg>
+              </span>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                Flexible scheduling
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                Check available time slots and choose a schedule that works best
+                for your day.
+              </p>
+            </article>
+
+            {/* Clear Pricing */}
+            <article className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-slate-950/5">
+              <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-600 group-hover:text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 2v20" />
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H7" />
+                </svg>
+              </span>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                Clear service details
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                Review service information, pricing and technician details
+                before submitting a booking request.
+              </p>
+            </article>
+
+            {/* Secure Payment */}
+            <article className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-lg hover:shadow-slate-950/5">
+              <span className="grid size-11 place-items-center rounded-xl bg-emerald-50 text-emerald-700 transition group-hover:bg-emerald-600 group-hover:text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="size-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="4" y="10" width="16" height="11" rx="2" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                  <path d="M12 14v3" />
+                </svg>
+              </span>
+
+              <h3 className="mt-5 text-lg font-bold text-slate-950">
+                Secure payments
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                Complete accepted bookings through the secure online payment
+                checkout flow.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section
         id="how-it-works"
         className="border-y border-slate-200 bg-[#f6f8f7]"

@@ -15,6 +15,7 @@ const links = [
   { href: "/technicians", label: "Technicians" },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About" },
 ];
 
 function isActive(pathname: string, href: string) {
