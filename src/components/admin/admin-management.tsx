@@ -49,7 +49,7 @@ export function AdminManagement() {
       setLoading(true);
 
       const response = await apiRequest<Admin[]>(
-        "/api/admin/admins?page=1&limit=50",
+        "/dashboard/admin/admins?page=1&limit=50",
         {
           token: session.token,
         },
@@ -71,9 +71,7 @@ export function AdminManagement() {
     void loadAdmins();
   }, [isReady, session]);
 
-  function handleChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
 
     setForm((previous) => ({
@@ -102,7 +100,7 @@ export function AdminManagement() {
 
     try {
       const response = await apiRequest<Admin>(
-        "/api/admin/admins",
+        "/src/app/dashboard/admin/admins/page.tsx",
         {
           method: "POST",
           token: session.token,
@@ -153,9 +151,7 @@ export function AdminManagement() {
   if (!session || session.user.role !== "ADMIN") {
     return (
       <section className="dashboard-surface rounded-2xl p-8 text-center">
-        <h1 className="text-xl font-bold text-slate-950">
-          Access denied
-        </h1>
+        <h1 className="text-xl font-bold text-slate-950">Access denied</h1>
 
         <p className="mt-2 text-sm text-slate-500">
           Only administrators can manage administrator accounts.
@@ -177,8 +173,7 @@ export function AdminManagement() {
         </h1>
 
         <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-          Create and manage administrator accounts for the FixItNow
-          platform.
+          Create and manage administrator accounts for the FixItNow platform.
         </p>
       </section>
 
@@ -216,9 +211,7 @@ export function AdminManagement() {
                 onChange={handleChange}
                 placeholder="Administrator name"
                 className={`w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 ${
-                  fieldErrors.name
-                    ? "border-rose-300"
-                    : "border-slate-200"
+                  fieldErrors.name ? "border-rose-300" : "border-slate-200"
                 }`}
               />
 
@@ -246,9 +239,7 @@ export function AdminManagement() {
                 onChange={handleChange}
                 placeholder="admin@example.com"
                 className={`w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 ${
-                  fieldErrors.email
-                    ? "border-rose-300"
-                    : "border-slate-200"
+                  fieldErrors.email ? "border-rose-300" : "border-slate-200"
                 }`}
               />
 
@@ -276,9 +267,7 @@ export function AdminManagement() {
                 onChange={handleChange}
                 placeholder="+880 1XXXXXXXXX"
                 className={`w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 ${
-                  fieldErrors.phone
-                    ? "border-rose-300"
-                    : "border-slate-200"
+                  fieldErrors.phone ? "border-rose-300" : "border-slate-200"
                 }`}
               />
 
@@ -306,9 +295,7 @@ export function AdminManagement() {
                 onChange={handleChange}
                 placeholder="Create a strong password"
                 className={`w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 ${
-                  fieldErrors.password
-                    ? "border-rose-300"
-                    : "border-slate-200"
+                  fieldErrors.password ? "border-rose-300" : "border-slate-200"
                 }`}
               />
 
@@ -324,9 +311,7 @@ export function AdminManagement() {
               disabled={creating}
               className="w-full rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {creating
-                ? "Creating administrator..."
-                : "Create administrator"}
+              {creating ? "Creating administrator..." : "Create administrator"}
             </button>
           </form>
         </section>
@@ -399,9 +384,7 @@ export function AdminManagement() {
                           : "bg-rose-50 text-rose-700"
                       }`}
                     >
-                      {admin.status === "ACTIVE"
-                        ? "Active"
-                        : "Banned"}
+                      {admin.status === "ACTIVE" ? "Active" : "Banned"}
                     </span>
 
                     <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">

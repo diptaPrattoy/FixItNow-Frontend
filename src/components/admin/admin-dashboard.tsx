@@ -138,7 +138,7 @@ export function AdminDashboard() {
           );
         })}
       </section>
-
+      {/*
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Link
           href="/dashboard/admin/users"
@@ -178,6 +178,156 @@ export function AdminDashboard() {
           <p className="mt-2 text-sm leading-6 text-slate-600">
             Create and manage administrator accounts for the platform.
           </p>
+        </Link>
+      </section> */}
+
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {/* Manage Users */}
+        <Link
+          href="/dashboard/admin/users"
+          className="group flex min-h-[180px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md"
+        >
+          <div>
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 transition-colors group-hover:bg-emerald-600 group-hover:text-white">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm7-3a4 4 0 110 8m4 5v-2a4 4 0 00-3-3.87"
+                />
+              </svg>
+            </div>
+
+            <h3 className="font-semibold text-slate-950">Manage users</h3>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Search accounts and control customer or technician access.
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between text-sm font-semibold text-emerald-600">
+            <span>Open management</span>
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </div>
+        </Link>
+
+        {/* Review Bookings */}
+        <Link
+          href="/dashboard/admin/bookings"
+          className="group flex min-h-[180px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md"
+        >
+          <div>
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+
+            <h3 className="font-semibold text-slate-950">Review bookings</h3>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Inspect every request, payment state and service outcome.
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between text-sm font-semibold text-emerald-600">
+            <span>View bookings</span>
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </div>
+        </Link>
+
+        {/* Manage Categories */}
+        <Link
+          href="/dashboard/admin/categories"
+          className="group flex min-h-[180px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md"
+        >
+          <div>
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors group-hover:bg-purple-600 group-hover:text-white">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </div>
+
+            <h3 className="font-semibold text-slate-950">Manage categories</h3>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Create service groups and control which categories stay active.
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between text-sm font-semibold text-emerald-600">
+            <span>Manage categories</span>
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </div>
+        </Link>
+
+        {/* Manage Admins */}
+        <Link
+          href="/dashboard/admin/admins"
+          className="group flex min-h-[180px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md"
+        >
+          <div>
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-orange-50 text-orange-600 transition-colors group-hover:bg-orange-600 group-hover:text-white">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 01-.1 1.2l2 1.5-2 3.4-2.3-.9a7.4 7.4 0 01-2.1 1.2L12.6 21h-4l-.3-2.6a7.4 7.4 0 01-2.1-1.2l-2.3.9-2-3.4 2-1.5A7.4 7.4 0 014 12c0-.4 0-.8.1-1.2l-2-1.5 2-3.4 2.3.9a7.4 7.4 0 012.1-1.2L8.6 3h4l.3 2.6a7.4 7.4 0 012.1 1.2l2.3-.9 2 3.4-2 1.5c.1.4.1.8.1 1.2z"
+                />
+              </svg>
+            </div>
+
+            <h3 className="font-semibold text-slate-950">Manage admins</h3>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Create and manage administrator accounts for the platform.
+            </p>
+          </div>
+
+          <div className="mt-5 flex items-center justify-between text-sm font-semibold text-emerald-600">
+            <span>Manage administrators</span>
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </div>
         </Link>
       </section>
 
