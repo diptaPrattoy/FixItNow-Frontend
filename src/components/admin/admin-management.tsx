@@ -49,7 +49,7 @@ export function AdminManagement() {
       setLoading(true);
 
       const response = await apiRequest<Admin[]>(
-        "/dashboard/admin/admins?page=1&limit=50",
+        "/api/admin/admins?page=1&limit=50",
         {
           token: session.token,
         },
@@ -99,19 +99,16 @@ export function AdminManagement() {
     setFieldErrors({});
 
     try {
-      const response = await apiRequest<Admin>(
-        "/src/app/dashboard/admin/admins/page.tsx",
-        {
-          method: "POST",
-          token: session.token,
-          body: {
-            name: form.name.trim(),
-            email: form.email.trim(),
-            password: form.password,
-            phone: form.phone.trim() || null,
-          },
+      const response = await apiRequest<Admin>("/api/admin/admins", {
+        method: "POST",
+        token: session.token,
+        body: {
+          name: form.name.trim(),
+          email: form.email.trim(),
+          password: form.password,
+          phone: form.phone.trim() || null,
         },
-      );
+      });
 
       setAdmins((previous) => [response.data, ...previous]);
 
