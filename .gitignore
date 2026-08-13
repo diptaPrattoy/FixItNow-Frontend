@@ -5,8 +5,6 @@ build/
 dist/
 coverage/
 
-.env
-.env.local
 .env.development.local
 .env.test.local
 .env.production.local
@@ -23,3 +21,4 @@ Thumbs.db
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+config.bat

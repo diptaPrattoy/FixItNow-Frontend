@@ -408,7 +408,7 @@ export default function LoginPage() {
                 isGoogleSubmitting ? "pointer-events-none opacity-60" : ""
               }
             >
-              <GoogleLogin
+              {/* <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   if (!credentialResponse.credential) {
                     toast(
@@ -429,6 +429,47 @@ export default function LoginPage() {
                 text="continue_with"
                 shape="rectangular"
                 width="100%"
+              /> */}
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  console.log("Google login success:", credentialResponse);
+
+                  if (!credentialResponse.credential) {
+                    toast("Google did not return a credential.", "error");
+                    return;
+                  }
+
+                  try {
+                    setIsSubmitting(true);
+
+                    const response = await apiRequest<AuthResponse>(
+                      "/api/auth/google",
+                      {
+                        method: "POST",
+                        body: {
+                          credential: credentialResponse.credential,
+                        },
+                      },
+                    );
+
+                    saveAuthSession(response.data);
+
+                    toast(`Welcome, ${response.data.user.name}.`, "success");
+
+                    router.push(getDashboardPath(response.data.user.role));
+
+                    router.refresh();
+                  } catch (error) {
+                    console.error("Google login error:", error);
+                    toast(getApiErrorMessage(error), "error");
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}
+                onError={() => {
+                  console.error("Google Login Failed");
+                  toast("Google login failed. Please try again.", "error");
+                }}
               />
             </div>
           </div>
